@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="미징량이 1028">
+  <meta property="og:description" content="반짝반짝 전광판 카운터!">
+  <meta property="og:image" content="https://dummyimage.com/1200x630/ff0000/ffffff&text=미징량이+1028">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/mijing">
+  <title>미징량이 1028</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Pretendard', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      letter-spacing: -0.01em;
+      margin: 0;
+      padding: 0 10px;
+      text-align: center;
+    }
+
+    .counter {
+      font-size: 6vw;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .flash {
+      color: red;
+      animation: flash 0.5s infinite alternate;
+      font-weight: 700;
+    }
+
+    @keyframes flash {
+      from { opacity: 1; }
+      to { opacity: 0.3; }
+    }
+
+    .marquee {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      background-color: red;
+      color: yellow;
+      font-size: 5vw;
+      padding: 10px 0;
+      display: none;
+      font-weight: 700;
+      animation: flash 0.5s infinite alternate;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="counter" id="counter">10월 1일</div>
+  <div class="marquee" id="marquee">
+    <span>미징량이 1028 1028!!!! 미징량이 1028 1028!!!! 미징량이 1028 1028!!!! 미징량이 1028 1028!!!!</span>
+  </div>
+
+  <script>
+    const counter = document.getElementById('counter');
+    const marquee = document.getElementById('marquee');
+
+    let day = 1;
+    let interval = null;
+
+    function startCounter() {
+      interval = setInterval(() => {
+        if (day < 28) {
+          day++;
+          counter.textContent = `10월 ${day}일`;
+        } else {
+          clearInterval(interval);
+          flashAndMarquee();
+        }
+      }, 200);
+    }
+
+    function flashAndMarquee() {
+      counter.textContent = '10월 28일';
+      counter.classList.add('flash');
+      marquee.style.display = 'block';
+      setTimeout(() => {
+        counter.classList.remove('flash');
+        marquee.style.display = 'none';
+        day = 1;
+        counter.textContent = `10월 ${day}일`;
+        startCounter();
+      }, 5000);
+    }
+
+    startCounter();
+  </script>
+</body>
+</html>
